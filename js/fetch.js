@@ -1,8 +1,9 @@
-let jsonPtath = '/data/movie.json';
+let jsonPath = './js/data/movie.json'; 
+
 
 
 export async function fetchTendance() {
-    const response = await fetch(jsonPtath);
+    const response = await fetch(jsonPath);
     const jsonId = await response.json();
 
     const movie = await Promise.all(
