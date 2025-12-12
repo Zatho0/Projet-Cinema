@@ -6,7 +6,7 @@ let loadLessBtn = document.getElementById("loadLess");
 
 
 
-function displayMovies(allMovies) {
+function displayMovies() {
     let container = document.getElementById("trendingMovies");
     container.innerHTML = "";
     let movies = allMovies.slice(0, displayCount);
@@ -24,15 +24,15 @@ function displayMovies(allMovies) {
     });
 }
 
-function addMovie(count, allMovies) {
+function addMovie(count) {
     displayCount += allMovies.length;
-    displayMovies(allMovies);
+    displayMovies();
     loadMoreBtn.style.display = "none";
     loadLessBtn.style.display = "block";
 }
-function lessMovie(count, allMovies) {
+function lessMovie(count) {
     displayCount = 3;
-    displayMovies(allMovies);
+    displayMovies();
     loadMoreBtn.style.display = "block";
     loadLessBtn.style.display = "none";
 }
