@@ -1,27 +1,20 @@
+import { fetchSearch } from "./fetch.js";
+
 let searchInput = document.getElementById("searchInput");
 let searchResult = document.getElementById("searchResults");
-
-let lastQuery = ""; 
 
 searchInput.addEventListener("input", function () {
     let query = searchInput.value.trim().toLowerCase();
     searchResult.innerHTML = "";
 
-    
-    lastQuery = query;
-
     if (query.length < 3) {
         searchResult.innerHTML = "<p>Veuillez entrer au moins 3 caractères pour la recherche.</p>";
+        return;
     }
 
-    fetch(`https://www.omdbapi.com/?s=${query}&apikey=64b6d3b5`)
-        .then(res => res.json())
+    fetchSearch(query)
         .then(data => {
-
-           
-            if (query !== lastQuery) return;
-
-            searchResult.innerHTML = ""; 
+            searchResult.innerHTML = "";
 
             if (data.Response === "True") {
                 data.Search.forEach(movie => {

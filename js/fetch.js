@@ -10,7 +10,7 @@ export async function fetchTendance() {
         Object.values(jsonId)
             .flat()
             .map((id) =>
-                fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&i=${id}`)
+                fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&i=${id}&type=movie`)
                     .then((res) => res.json())
                     .catch((err) => console.error(err))
             )
@@ -19,7 +19,7 @@ export async function fetchTendance() {
 }
 
 export async function fetchSearch(value){
-    const response = await fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&s=${value}`);
+    const response = await fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&s=${value}&type=movie`);
     const searchResults = await response.json();
     return searchResults;
 }
