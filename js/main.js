@@ -5,14 +5,8 @@ let loadMoreBtn = document.getElementById("loadMore");
 let loadLessBtn = document.getElementById("loadLess");
 
 
-fetchTendance().then(movie => {
-    allMovies = movie;
-    displayMovies();
-})
 
-
-
-function displayMovies() {
+function displayMovies(allMovies) {
     let container = document.getElementById("trendingMovies");
     container.innerHTML = "";
     let movies = allMovies.slice(0, displayCount);
@@ -30,15 +24,24 @@ function displayMovies() {
     });
 }
 
-loadMoreBtn.addEventListener("click", () => {
-    displayCount = allMovies.length;
-    displayMovies();
+function addMovie(count, allMovies) {
+    displayCount += allMovies.length;
+    displayMovies(allMovies);
     loadMoreBtn.style.display = "none";
     loadLessBtn.style.display = "block";
-});
-loadLessBtn.addEventListener("click", () => {
+}
+function lessMovie(count, allMovies) {
     displayCount = 3;
-    displayMovies();
+    displayMovies(allMovies);
     loadMoreBtn.style.display = "block";
     loadLessBtn.style.display = "none";
-});
+}
+
+loadMoreBtn.addEventListener("click", () => addMovie(displayCount, allMovies));
+loadLessBtn.addEventListener("click", () => lessMovie(displayCount, allMovies));
+
+fetchTendance().then(movie => {
+    allMovies = movie;
+    displayMovies();
+})
+
