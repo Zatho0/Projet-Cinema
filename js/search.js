@@ -2,33 +2,64 @@ import { fetchSearch } from "./fetch.js";
 
 let searchInput = document.getElementById("searchInput");
 let searchResult = document.getElementById("searchResults");
+let loadMoreBtn = document.getElementById("loadMore");
+let loadLessBtn = document.getElementById("loadLess");
+let page = 1;
 
-searchInput.addEventListener("input", function () {
-    let query = searchInput.value.trim().toLowerCase();
-    searchResult.innerHTML = "";
 
-    if (query.length < 3) {
-        searchResult.innerHTML = "<p>Veuillez entrer au moins 3 caractères pour la recherche.</p>";
-        return;
-    }
+function moreMovie() {
+  page += 1;
+  result();
+}
+function lessMovie() {
+  page = 1;
+  searchResult.innerHTML = "";
+  result();
+}
 
-    fetchSearch(query)
-        .then(data => {
-            searchResult.innerHTML = "";
+function result() {
+  let query = searchInput.value.trim().toLowerCase();
 
-            if (data.Response === "True") {
-                data.Search.forEach(movie => {
-                    let movieDiv = document.createElement("div");
-                    movieDiv.innerHTML = `
+  if (query.length < 3) {
+    searchResult.innerHTML =
+      "<p>Veuillez entrer au moins 3 caractères pour la recherche.</p>";
+    loadMoreBtn.style.display = "none";
+    loadLessBtn.style.display = "none";
+    return;
+  }
+
+  fetchSearch(query, page)
+    .then((data) => {
+      if (data.Response === "True") {
+        data.Search.forEach((movie) => {
+          let movieDiv = document.createElement("div");
+          movieDiv.innerHTML = `
                         <img src="${movie.Poster}" alt="${movie.Title} Poster">
                         <h3>${movie.Title}</h3>
                         <a href="movie.html?id=${movie.imdbID}">Détails</a>
                     `;
-                    searchResult.appendChild(movieDiv);
-                });
-            } else {
-                searchResult.innerHTML = "<p>Aucun résultat trouvé</p>";
-            }
-        })
-        .catch(err => console.error("Erreur:", err));
+          searchResult.appendChild(movieDiv);
+          if (page === 1) {
+          loadMoreBtn.style.display = "block";
+        }
+        });
+        
+      } else {
+        searchResult.innerHTML = "<p>Aucun résultat trouvé</p>";
+        loadLessBtn.style.display = "none";
+        loadMoreBtn.style.display = "none";
+      }
+    })
+    .catch((err) => console.error("Erreur:", err));
+}
+searchInput.addEventListener("input", result);
+loadMoreBtn.addEventListener("click", () => {
+  moreMovie();
+  loadMoreBtn.style.display = "none";
+  loadLessBtn.style.display = "block";
+});
+loadLessBtn.addEventListener("click", () => {
+  lessMovie();
+  loadMoreBtn.style.display = "block";
+  loadLessBtn.style.display = "none";
 });
