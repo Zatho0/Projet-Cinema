@@ -1,0 +1,170 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BASE MOBILE */
+body {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* HEADER */
+header {
+    background-color: #141414;
+    padding: 14px 20px;
+    border-bottom: 1px solid #222;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #e50914;
+}
+
+/* MAIN */
+main {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* TRENDING - MOBILE = 1 COLONNE */
+.trending {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* CARD FILM */
+.movie {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.movie img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.movie h3 {
+    font-size: 16px;
+    padding: 12px;
+}
+
+.movie p {
+    font-size: 13px;
+    color: #cccccc;
+    padding: 0 12px 12px;
+    line-height: 1.4;
+}
+
+/* LIEN DETAILS */
+.movie a {
+    display: block;
+    text-align: center;
+    background-color: #e50914;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* BOUTONS */
+button {
+    width: 100%;
+    background-color: #e50914;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* =========================
+   TABLETTE ≥ 600px
+========================= */
+@media (min-width: 600px) {
+
+    h1 {
+        font-size: 26px;
+    }
+
+    nav a {
+        font-size: 15px;
+    }
+
+    .trending {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    button {
+        width: auto;
+        padding: 12px 24px;
+        margin-right: 12px;
+    }
+}
+
+/* =========================
+   DESKTOP ≥ 900px
+========================= */
+@media (min-width: 900px) {
+
+    main {
+        padding: 32px;
+    }
+
+    h1 {
+        font-size: 32px;
+        text-align: left;
+    }
+
+    .trending {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+
+    .movie {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .movie:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .movie img {
+        height: 320px;
+    }
+}

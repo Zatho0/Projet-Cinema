@@ -19,8 +19,9 @@ export async function fetchTendance() {
 }
 
 export async function fetchSearch(value, page){
-    const response = await fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&s=${value}&type=movie&page=${page}`);
+    const response = await fetch(`http://www.omdbapi.com/?apikey=64b6d3b5&s=${value}&type=movie&page=${page}&plot=short`);
     const searchResults = await response.json();
+    console.log(searchResults);
     return searchResults;
 }
 export async function fetchMovieById(id) {

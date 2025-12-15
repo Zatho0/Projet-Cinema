@@ -36,6 +36,7 @@ function result() {
           movieDiv.innerHTML = `
                         <img src="${movie.Poster}" alt="${movie.Title} Poster">
                         <h3>${movie.Title}</h3>
+                        
                         <a href="movie.html?id=${movie.imdbID}">Détails</a>
                     `;
           searchResult.appendChild(movieDiv);
